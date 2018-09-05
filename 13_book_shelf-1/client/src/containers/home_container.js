@@ -8,7 +8,7 @@ class HomeContainer extends Component {
     limit: 1
   };
   componentWillMount() {
-    this.props.dispatch(getBooks(this.state.limit, 0, "desc"));
+    this.props.dispatch(getBooks(this.state.limit, 0, "asc"));
   }
 
   renderItems = books =>
