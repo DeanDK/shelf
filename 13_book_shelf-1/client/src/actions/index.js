@@ -11,10 +11,7 @@ export function getBooks(limit = 10, start = 0, order = "asc", list = "") {
       }
     });
 
-  return {
-    type: "GET_BOOKS",
-    payload: request
-  };
+  return { type: "GET_BOOKS", payload: request };
 }
 
 export function getBookWithReviewer(id) {
@@ -26,15 +23,9 @@ export function getBookWithReviewer(id) {
       let book = data;
 
       axios.get(`/api/getReviewer?id=${book.ownerId}`).then(({ data }) => {
-        let response = {
-          book,
-          reviewer: data
-        };
+        let response = { book, reviewer: data };
 
-        dispatch({
-          type: "GET_BOOK_W_REVIEWER",
-          payload: response
-        });
+        dispatch({ type: "GET_BOOK_W_REVIEWER", payload: response });
       });
     });
   };
@@ -42,10 +33,7 @@ export function getBookWithReviewer(id) {
 export function clearBookWithReviewer() {
   return {
     type: "CLEAR_BOOK_W_REVIEWER",
-    payload: {
-      book: {},
-      reviewer: {}
-    }
+    payload: { book: {}, reviewer: {} }
   };
 }
 
@@ -55,8 +43,10 @@ export function loginUser({ email, password }) {
   const request = axios
     .post("/api/login", { email, password })
     .then(response => response.data);
-  return {
-    type: "USER_LOGIN",
-    payload: request
-  };
+  return { type: "USER_LOGIN", payload: request };
+}
+
+export function auth() {
+  const request = axios.get(`/api/auth`).then(response => response.data);
+  return { type: "USER_AUTH", payload: request };
 }
